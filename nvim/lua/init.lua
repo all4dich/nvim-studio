@@ -53,7 +53,10 @@ Plug("numToStr/Comment.nvim")
 Plug("folke/which-key.nvim")
 Plug("echasnovski/mini.icons")
 Plug("brenoprata10/nvim-highlight-colors")
-
+Plug("ray-x/go.nvim")
+Plug("ray-x/guihua.lua")
+-- Plug("alexander-born/bazel.nvim")
+-- Plug("alexander-born/cmp-bazel")
 -- All of your Plugins must be added before the following line
 -- :PlugInstall to install the plugins
 -- :PlugUpdate to install or update the plugins
@@ -64,6 +67,21 @@ vim.call("plug#end")
 -----------------------
 -- Plugin Settings
 -----------------------
+local format_sync_grp = vim.api.nvim_create_augroup("GoFormat", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+   require('go.format').goimports()
+  end,
+  group = format_sync_grp,
+})
+require('go').setup()
+
+-- require'cmp'.setup {
+--   sources = {
+--     { name = 'bazel' }
+--   }
+-- }
 local function my_on_attach(bufnr)
   local api = require("nvim-tree.api")
 

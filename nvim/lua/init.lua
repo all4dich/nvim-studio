@@ -55,14 +55,16 @@ Plug("echasnovski/mini.icons")
 Plug("brenoprata10/nvim-highlight-colors")
 Plug("ray-x/go.nvim")
 Plug("ray-x/guihua.lua")
--- Plug("alexander-born/bazel.nvim")
--- Plug("alexander-born/cmp-bazel")
+Plug 'google/vim-maktaba'
+Plug 'bazelbuild/vim-bazel'
+Plug("alexander-born/bazel.nvim")
 -- All of your Plugins must be added before the following line
 -- :PlugInstall to install the plugins
 -- :PlugUpdate to install or update the plugins
 -- :PlugDiff to review the changes from the last update
 -- :PlugClean to remove plugins no longer in the list
 vim.call("plug#end")
+
 
 -----------------------
 -- Plugin Settings
@@ -77,11 +79,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
 })
 require('go').setup()
 
--- require'cmp'.setup {
---   sources = {
---     { name = 'bazel' }
---   }
--- }
+
 local function my_on_attach(bufnr)
   local api = require("nvim-tree.api")
 

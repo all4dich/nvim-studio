@@ -26,6 +26,7 @@ Plug("hrsh7th/cmp-nvim-lsp")
 Plug("hrsh7th/nvim-cmp")
 Plug("hrsh7th/cmp-vsnip")
 Plug("hrsh7th/vim-vsnip")
+Plug("uga-rosa/cmp-dictionary")
 Plug("nvim-tree/nvim-web-devicons")
 Plug("nvim-tree/nvim-tree.lua")
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
@@ -293,11 +294,23 @@ cmp.setup({
     -- { name = 'luasnip' }, -- For luasnip users.
     -- { name = 'ultisnips' }, -- For ultisnips users.
     -- { name = 'snippy' }, -- For snippy users.
+    { name = "buffer",
+      option= {
+        keyword_length = 2,
+      }
+    },
+    -- { name = "dictionary", keyword_length = 2},
   }),
   formatting = {
     format = require("nvim-highlight-colors").format,
   },
 })
+
+-- local cmp_dictionary = require("cmp_dictionary")
+-- cmp_dictionary.setup({
+--   paths = { "/usr/share/dict/words" },
+--   exact_length = 2,
+-- })
 
 cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),

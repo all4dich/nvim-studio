@@ -467,18 +467,18 @@ cmp.setup({
         keyword_length = 2,
       }
     },
-    -- { name = "dictionary", keyword_length = 2},
+    { name = "dictionary", keyword_length = 2 },
   }),
   formatting = {
     format = require("nvim-highlight-colors").format,
   },
 })
 
--- local cmp_dictionary = require("cmp_dictionary")
--- cmp_dictionary.setup({
---   paths = { "/usr/share/dict/words" },
---   exact_length = 2,
--- })
+local cmp_dictionary = require("cmp_dictionary")
+cmp_dictionary.setup({
+  paths = { "/usr/share/dict/words" },
+  exact_length = 2,
+})
 
 cmp.setup.cmdline({ "/", "?" }, {
   mapping = cmp.mapping.preset.cmdline(),

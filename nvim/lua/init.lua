@@ -114,6 +114,14 @@ vim.call("plug#begin")
 Plug("catppuccin/nvim", { ["as"] = "catppuccin" })
 Plug("lewis6991/gitsigns.nvim")
 Plug("lukas-reineke/indent-blankline.nvim")
+Plug("hrsh7th/cmp-buffer")
+Plug("hrsh7th/cmp-path")
+Plug("hrsh7th/cmp-cmdline")
+Plug("hrsh7th/cmp-nvim-lsp")
+Plug("hrsh7th/nvim-cmp")
+Plug("hrsh7th/cmp-vsnip")
+Plug("hrsh7th/vim-vsnip")
+Plug("uga-rosa/cmp-dictionary")
 Plug("nvim-tree/nvim-web-devicons")
 Plug("nvim-tree/nvim-tree.lua")
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
@@ -428,80 +436,52 @@ vim.api.nvim_create_user_command("Format", function(args)
 end, { range = true })
 
 require("nvim-highlight-colors").setup({})
-require("blink.cmp").setup({
-  keymap = {
-    -- 'default' (recommended) for mappings similar to built-in completions
-    --   <c-y> to accept ([y]es) the completion.
-    --    This will auto-import if your LSP supports it.
-    --    This will expand snippets if the LSP sent a snippet.
-    -- 'super-tab' for tab to accept
-    -- 'enter' for enter to accept
-    -- 'none' for no mappings
-    --
-    -- For an understanding of why the 'default' preset is recommended,
-    -- you will need to read `:help ins-completion`
-    --
-    -- No, but seriously. Please read `:help ins-completion`, it is really good!
-    --
-    -- All presets have the following mappings:
-    -- <tab>/<s-tab>: move to right/left of your snippet expansion
-    -- <c-space>: Open menu or open docs if already open
-    -- <c-n>/<c-p> or <up>/<down>: Select next/previous item
-    -- <c-e>: Hide menu
-    -- <c-k>: Toggle signature help
-    --
-    -- See :h blink-cmp-config-keymap for defining your own keymap
-    preset = "default",
-
-    -- For more advanced Luasnip keymaps (e.g. selecting choice nodes, expansion) see:
-    --    https://github.com/L3MON4D3/LuaSnip?tab=readme-ov-file#keymaps
+local cmp = require("cmp")
+cmp.setup({
+  snippet = {
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body)
+    end,
   },
-
-  appearance = {
-    -- 'mono' (default) for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-    -- Adjusts spacing to ensure icons are aligned
-    nerd_font_variant = "mono",
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
   },
-
-  completion = {
-    -- By default, you may press `<c-space>` to show the documentation.
-    -- Optionally, set `auto_show = true` to show the documentation after a delay.
-    documentation = { auto_show = false, auto_show_delay_ms = 500 },
-    menu = {
-      draw = {
-        components = {
-          -- customize the drawing of kind icons
-          kind_icon = {
-            text = function(ctx)
-              -- default kind icon
-              local icon = ctx.kind_icon
-              -- if LSP source, check for color derived from documentation
-              if ctx.item.source_name == "LSP" then
-                local color_item = require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
-                if color_item and color_item.abbr ~= "" then
-                  icon = color_item.abbr
-                end
-              end
-              return icon .. ctx.icon_gap
-            end,
-            highlight = function(ctx)
-              -- default highlight group
-              local highlight = "BlinkCmpKind" .. ctx.kind
-              -- if LSP source, check for color derived from documentation
-              if ctx.item.source_name == "LSP" then
-                local color_item = require("nvim-highlight-colors").format(ctx.item.documentation, { kind = ctx.kind })
-                if color_item and color_item.abbr_hl_group then
-                  highlight = color_item.abbr_hl_group
-                end
-              end
-              return highlight
-            end,
-          },
-        },
-      },
+  mapping = cmp.mapping.preset.insert({
+    ["<C-b>"] = cmp.mapping.scroll_docs(-4),
+    ["<C-f>"] = cmp.mapping.scroll_docs(4),
+    ["<S-Tab>"] = cmp.mapping.select_prev_item(),
+    ["<Tab>"] = cmp.mapping.select_next_item(),
+    ["<C-Space>"] = cmp.mapping.complete(),
+    ["<C-e>"] = cmp.mapping.abort(),
+    ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+  }),
+  sources = cmp.config.sources({
+    { name = "nvim_lsp" },
+    { name = "vsnip" }, -- For vsnip users.
+    -- { name = 'luasnip' }, -- For luasnip users.
+    -- { name = 'ultisnips' }, -- For ultisnips users.
+    -- { name = 'snippy' }, -- For snippy users.
+    { name = "buffer",
+      option= {
+        keyword_length = 2,
+      }
     },
+    -- { name = "dictionary", keyword_length = 2},
+  }),
+  formatting = {
+    format = require("nvim-highlight-colors").format,
   },
+})
 
+-- local cmp_dictionary = require("cmp_dictionary")
+-- cmp_dictionary.setup({
+--   paths = { "/usr/share/dict/words" },
+--   exact_length = 2,
+-- })
+
+cmp.setup.cmdline({ "/", "?" }, {
+  mapping = cmp.mapping.preset.cmdline(),
   sources = {
     default = { "lsp", "path", "snippets", "lazydev" },
     providers = {

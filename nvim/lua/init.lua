@@ -473,16 +473,16 @@ require("which-key").setup({
 -- Mappings
 -----------------------
 -- Move around buffers by pressing ctrl+h or ctrl+l
-vim.keymap.set("n", "<C-h>", "<Cmd>BufferPrevious<CR>")
-vim.keymap.set("n", "<C-l>", "<Cmd>BufferNext<CR>")
+vim.keymap.set("n", "<C-n>", "<Cmd>BufferPrevious<CR>")
+vim.keymap.set("n", "<C-m>", "<Cmd>BufferNext<CR>")
 
 vim.keymap.set({ "n", "v" }, "<C-k>", "<Cmd>Format<CR>")
 
 -- Move between split windows
-vim.keymap.set("n", "<A-h>", "<Cmd>wincmd h<CR>")
-vim.keymap.set("n", "<A-l>", "<Cmd>wincmd l<CR>")
-vim.keymap.set("n", "<A-k>", "<Cmd>wincmd k<CR>")
-vim.keymap.set("n", "<A-j>", "<Cmd>wincmd j<CR>")
+vim.keymap.set("n", "<C-h>", "<Cmd>wincmd h<CR>")
+vim.keymap.set("n", "<C-l>", "<Cmd>wincmd l<CR>")
+vim.keymap.set("n", "<C-k>", "<Cmd>wincmd k<CR>")
+vim.keymap.set("n", "<C-j>", "<Cmd>wincmd j<CR>")
 
 -- Save and close the buffer
 vim.keymap.set("n", ",w", "<Cmd>BufferClose<CR>")

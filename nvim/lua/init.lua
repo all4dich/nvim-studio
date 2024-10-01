@@ -676,8 +676,8 @@ vim.keymap.set("v", "<Tab>", ">gv")
 vim.keymap.set("v", "<S-Tab>", "<gv")
 
 -- Move around buffers by pressing ctrl+h or ctrl+l
-vim.keymap.set("n", "<C-h>", "<Cmd>BufferPrevious<CR>")
-vim.keymap.set("n", "<C-l>", "<Cmd>BufferNext<CR>")
+vim.keymap.set("n", "<C-n>", "<Cmd>BufferPrevious<CR>")
+vim.keymap.set("n", "<C-m>", "<Cmd>BufferNext<CR>")
 
 vim.keymap.set({ "n", "v" }, "<C-k>", "<Cmd>Format<CR>")
 

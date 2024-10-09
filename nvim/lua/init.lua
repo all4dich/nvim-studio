@@ -532,6 +532,7 @@ vim.cmd("let g:tagbar_left = 1")
 vim.cmd("let g:tagbar_width = 30")
 vim.cmd("let g:tagbar_sort = 1")
 vim.cmd("let g:tagbar_autofocus = 1")
+vim.cmd("let g:tagbar_autoclose = 0")
 
 require("gitsigns").setup({
   numhl = true, -- Toggle with `:Gitsigns toggle_numhl`

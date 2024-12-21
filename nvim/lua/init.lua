@@ -225,7 +225,7 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- Plug("catppuccin/nvim", { ["as"] = "catppuccin" })
-vim.cmd.colorscheme("catppuccin")
+vim.cmd.colorscheme("darkBlue")
 --[[ require("catppuccin").setup({
   integrations = {
     barbar = true,

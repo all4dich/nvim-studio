@@ -161,6 +161,8 @@ Plug("ray-x/guihua.lua")
 Plug 'google/vim-maktaba'
 Plug 'bazelbuild/vim-bazel'
 Plug("alexander-born/bazel.nvim")
+Plug("nvim-lualine/lualine.nvim")
+Plug("nvim-tree/nvim-web-devicons")
 -- All of your Plugins must be added before the following line
 -- :PlugInstall to install the plugins
 -- :PlugUpdate to install or update the plugins
@@ -263,7 +265,7 @@ require("lualine").setup({
     "nvim-tree",
     "man",
     "mason",
-    "tagbar",
+--    "tagbar",
   },
 })
 
@@ -341,7 +343,9 @@ local servers = {
   "rust_analyzer",
   "pylsp",
   "lua_ls",
+  "gopls",
   "cmake",
+  "ansible",
 }
 local lspconfig = require("lspconfig")
 local on_attach = function(_, _)
@@ -402,6 +406,31 @@ lspconfig["efm"].setup({
 
   --root_dir = lspconfig.util.root_pattern('.git', vim.fn.getcwd()),
 })
+
+-- Setup for Ansible LSP
+lspconfig.ansiblels.setup {
+    cmd = { "ansible-language-server", "--stdio" }, -- Command to start the server
+    filetypes = { "yaml", "yml" },                 -- File types to enable the LSP for
+    settings = {
+        ansible = {
+            ansible = {
+                path = "ansible",                  -- Path to ansible binary (optional)
+            },
+            executionEnvironment = {
+                enabled = false,                  -- Disable execution environment (adjust as needed)
+            },
+            python = {
+                interpreterPath = "/Users/sunjoo/program/venv/bin/python3",      -- Path to Python interpreter (optional)
+            },
+            validation = {
+                enabled = true,                   -- Enable validation for playbooks
+                lint = {
+                    enabled = true,               -- Enable linting
+                },
+            },
+        },
+    },
+}
 
 require("lint").linters_by_ft = {
   c = { "clangtidy" },
@@ -529,7 +558,7 @@ cmp.setup.cmdline({ "/", "?" }, {
 
 -- Plug("preservim/tagbar")
 vim.cmd("let g:tagbar_left = 1")
-vim.cmd("let g:tagbar_width = 30")
+vim.cmd("let g:tagbar_width = 45") 
 vim.cmd("let g:tagbar_sort = 1")
 vim.cmd("let g:tagbar_autofocus = 1")
 vim.cmd("let g:tagbar_autoclose = 0")

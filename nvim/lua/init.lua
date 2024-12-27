@@ -673,6 +673,16 @@ require("diffview").setup({
       layout = "diff4_mixed",
     },
   },
+  file_history_panel = {
+    win_config = {
+      height = 35,
+    }
+  },
+  file_panel = {
+    win_config = {
+      width = 50,
+    },
+  },
 })
 
 require("Comment").setup()

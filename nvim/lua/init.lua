@@ -730,10 +730,10 @@ vim.keymap.set("n", "<C-m>", "<Cmd>BufferNext<CR>")
 vim.keymap.set({ "n", "v" }, "<C-k>", "<Cmd>Format<CR>")
 
 -- Move between split windows
-vim.keymap.set("n", "<A-h>", "<Cmd>wincmd h<CR>", { desc = "Move focus to the left window" })
-vim.keymap.set("n", "<A-l>", "<Cmd>wincmd l<CR>", { desc = "Move focus to the right window" })
-vim.keymap.set("n", "<A-k>", "<Cmd>wincmd k<CR>", { desc = "Move focus to the upper window" })
-vim.keymap.set("n", "<A-j>", "<Cmd>wincmd j<CR>", { desc = "Move focus to the lower window" })
+vim.keymap.set("n", "<C-h>", "<Cmd>wincmd h<CR>", { desc = "Move focus to the left window" })
+vim.keymap.set("n", "<C-l>", "<Cmd>wincmd l<CR>", { desc = "Move focus to the right window" })
+vim.keymap.set("n", "<C-k>", "<Cmd>wincmd k<CR>", { desc = "Move focus to the upper window" })
+vim.keymap.set("n", "<C-j>", "<Cmd>wincmd j<CR>", { desc = "Move focus to the lower window" })
 
 -- Save and close the buffer
 vim.keymap.set("n", ",w", "<Cmd>BufferClose<CR>")

@@ -163,6 +163,8 @@ Plug 'bazelbuild/vim-bazel'
 Plug("alexander-born/bazel.nvim")
 Plug("nvim-lualine/lualine.nvim")
 Plug("nvim-tree/nvim-web-devicons")
+Plug("tpope/vim-fugitive")
+Plug("rbong/vim-flog")
 -- All of your Plugins must be added before the following line
 -- :PlugInstall to install the plugins
 -- :PlugUpdate to install or update the plugins

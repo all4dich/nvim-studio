@@ -165,6 +165,7 @@ Plug("nvim-lualine/lualine.nvim")
 Plug("nvim-tree/nvim-web-devicons")
 Plug("tpope/vim-fugitive")
 Plug("rbong/vim-flog")
+Plug("github/copilot.vim")
 -- All of your Plugins must be added before the following line
 -- :PlugInstall to install the plugins
 -- :PlugUpdate to install or update the plugins
@@ -210,13 +211,13 @@ require("nvim-tree").setup({
   },
   view = {
     side = "right",
-    width = 30,
+    width = 50,
   },
   renderer = {
     group_empty = true,
   },
   filters = {
-    dotfiles = true,
+    dotfiles = false,
   },
 })
 
@@ -229,7 +230,7 @@ require("nvim-treesitter.configs").setup({
 })
 
 -- Plug("catppuccin/nvim", { ["as"] = "catppuccin" })
-vim.cmd.colorscheme("darkBlue")
+-- vim.cmd.colorscheme("darkBlue")
 --[[ require("catppuccin").setup({
   integrations = {
     barbar = true,
@@ -780,3 +781,6 @@ vim.keymap.set("n", "<leader>cc", builtin.lsp_incoming_calls, { desc = "List LSP
 vim.keymap.set("n", "<leader>cs", builtin.lsp_references, { desc = "List LSP references" })
 -- Goto the definition of the type of the word under the cursor
 vim.keymap.set("n", "<leader>cg", builtin.lsp_type_definitions, { desc = "Goto the definition" })
+vim.keymap.set("n", "<leader>gd", builtin.lsp_definitions, { desc = "Goto the definition" })
+vim.keymap.set("n", "<leader>lb", builtin.buffers, { desc = "Buffers" })
+

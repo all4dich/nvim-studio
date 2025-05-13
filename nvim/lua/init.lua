@@ -7,6 +7,14 @@ vim = vim
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 
+-----------------------
+-- Vim Personal Options
+-----------------------
+vim.g.ctags_path = "/Users/sunjoo/.local/bin/ctags"
+vim.o.tags = "./tags;,tags"
+
+-- vim.opt.tags = vim.opt.tags + { '/usr/bin/ctags;'}
+
 -- Turn on plugin and indent, depending on file type
 vim.cmd("filetype plugin indent on")
 
@@ -125,7 +133,7 @@ Plug("uga-rosa/cmp-dictionary")
 Plug("nvim-tree/nvim-web-devicons")
 Plug("nvim-tree/nvim-tree.lua")
 Plug("nvim-treesitter/nvim-treesitter", { ["do"] = ":TSUpdate" })
-Plug("guru245/lualine.nvim")
+-- Plug("guru245/lualine.nvim")
 Plug("arkav/lualine-lsp-progress")
 Plug("romgrk/barbar.nvim")
 Plug("williamboman/mason.nvim")
@@ -219,6 +227,10 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = false,
   },
+  trash = {
+    cmd = "trash",
+    require_confirm = false,
+  },
 })
 
 require("nvim-treesitter.configs").setup({
@@ -285,7 +297,6 @@ require("mason-tool-installer").setup({
     "rust_analyzer",
     "pylsp",
     "lua_ls",
-    "cmake",
     "efm",
   },
 })
@@ -348,7 +359,6 @@ local servers = {
   "lua_ls",
   "gopls",
   "cmake",
-  "ansible",
 }
 local lspconfig = require("lspconfig")
 local on_attach = function(_, _)

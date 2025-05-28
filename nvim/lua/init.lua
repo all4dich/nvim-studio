@@ -6,7 +6,12 @@ vim = vim
 -- This is requested by nvim-tree.
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
-
+-----------------------
+-- Vim Personal Options
+-----------------------
+vim.g.ctags_path = "/Users/sunjoo/.local/bin/ctags"
+vim.o.tags = "./tags;,tags"
+ 
 -- Turn on plugin and indent, depending on file type
 vim.cmd("filetype plugin indent on")
 

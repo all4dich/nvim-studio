@@ -173,6 +173,9 @@ Plug("nvim-tree/nvim-web-devicons")
 Plug("tpope/vim-fugitive")
 Plug("rbong/vim-flog")
 Plug("github/copilot.vim")
+Plug("MeanderingProgrammer/render-markdown.nvim")
+-- CodeCompanion
+Plug("olimorris/codecompanion.nvim")
 -- All of your Plugins must be added before the following line
 -- :PlugInstall to install the plugins
 -- :PlugUpdate to install or update the plugins
@@ -210,6 +213,19 @@ local function my_on_attach(bufnr)
   --vim.keymap.set('n', '<F12>',  api.tree.change_root_to_parent, opts('Up'))
   vim.keymap.set("n", "?", api.tree.toggle_help, opts("Help"))
 end
+
+require("codecompanion").setup({
+    adapters = {
+      gemini = function()
+        return require("codecompanion.adapters").extend("gemini", {
+  env = {
+    api_key = "AIzaSyD7h3mkxxD3Dpr0f5_EPoQERGN-eBcBuVY",
+  },
+      })
+      end,
+    },
+})
+
 require("nvim-tree").setup({
   on_attach = my_on_attach,
   respect_buf_cwd = true,

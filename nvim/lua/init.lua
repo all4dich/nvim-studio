@@ -10,8 +10,10 @@ vim.g.loaded_netrwPlugin = 1
 -- Vim Personal Options
 -----------------------
 vim.g.ctags_path = "/Users/sunjoo/.local/bin/ctags"
-vim.o.tags = "./tags;,tags"
- 
+vim.g.tagbar_ctags_bin = "/Users/sunjoo/.local/bin/ctags"
+vim.g.ctags_use_shell = 0
+vim.g.ctags_default_languages = { 'c', 'cpp', 'python' }
+
 -- Turn on plugin and indent, depending on file type
 vim.cmd("filetype plugin indent on")
 

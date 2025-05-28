@@ -224,6 +224,10 @@ require("nvim-tree").setup({
   filters = {
     dotfiles = false,
   },
+  trash = {
+    cmd = "trash",
+    require_confirm = false,
+  },
 })
 
 require("nvim-treesitter.configs").setup({

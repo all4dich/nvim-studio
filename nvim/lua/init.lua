@@ -174,6 +174,7 @@ Plug("tpope/vim-fugitive")
 Plug("rbong/vim-flog")
 Plug("github/copilot.vim")
 Plug("MeanderingProgrammer/render-markdown.nvim")
+Plug("OXY2DEV/markview.nvim")
 -- CodeCompanion
 Plug("olimorris/codecompanion.nvim")
 -- All of your Plugins must be added before the following line
@@ -215,15 +216,37 @@ local function my_on_attach(bufnr)
 end
 
 require("codecompanion").setup({
-    adapters = {
-      gemini = function()
-        return require("codecompanion.adapters").extend("gemini", {
-  env = {
-    api_key = "AIzaSyD7h3mkxxD3Dpr0f5_EPoQERGN-eBcBuVY",
+  adapters = {
+    gemini = function()
+      return require("codecompanion.adapters").extend("gemini", {
+        env = {
+          api_key = "",
+        },
+    })
+    end,
   },
-      })
-      end,
+  strategies = {
+    chat = {
+      adapter = "gemini",
     },
+    inline = {
+      adapter = "gemini",
+    },
+  },
+})
+
+require("render-markdown").setup({
+  ft = {"markdown", "codecompanion"},
+})
+
+require("markview").setup({
+  lazy = false,
+  opts = {
+    preview = {
+      filetypes = { "markdown", "codecompanion" },
+      ignore_buftypes = {},
+    },
+  },
 })
 
 require("nvim-tree").setup({
